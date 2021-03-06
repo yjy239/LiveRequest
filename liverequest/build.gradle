@@ -1,0 +1,40 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+ext{
+    lifecycle_version = "2.2.0"
+    retrofitVersion = "2.9.0"
+    targetSdkVersion = 28
+    compileSdkVersion = 28
+    buildToolsVersion = "28.0.3"
+    minSdkVersion = 21
+    androidXVersion = "1.2.0"
+}
+
+
+android {
+    compileSdkVersion project.ext.compileSdkVersion
+    buildToolsVersion project.ext.buildToolsVersion
+    defaultConfig {
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
+    }
+
+    //主工程依赖子module时默认依赖的是子module的release版本,让module不再按默认只构建release版本
+    publishNonDefault true
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${project.ext.lifecycle_version}"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${project.ext.lifecycle_version}"
+    implementation "com.squareup.retrofit2:retrofit:${project.ext.retrofitVersion}"
+    implementation "androidx.appcompat:appcompat:${androidXVersion}"
+    implementation "com.google.code.gson:gson:2.8.0"
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
